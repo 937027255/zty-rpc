@@ -24,9 +24,11 @@ public class Provider {
             String ip = addr.getHostAddress().toString();
             System.out.println("ip:" + ip);
             RemoteRegister.regist(HelloService.class.getName(),new URL(ip,8080));
+
             Map<String, List<URL>> object = RemoteRegister.getObject();
             List<URL> urls = object.get(HelloService.class.getName());
             System.out.println(urls.get(0).getHost());
+
             //启动tomcat
             HttpServer httpServer = new HttpServer();
             httpServer.start(ip,8080);

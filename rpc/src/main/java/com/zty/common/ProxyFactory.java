@@ -31,11 +31,12 @@ public class ProxyFactory {
                         //负载均衡
                         urls.removeAll(usedUrls);
                         url = LoadBalance.getRandomUrl(urls);
+                        max--;
 
                         result = httpClient.send(url.getHost(), url.getPort(), invocation);
                     } catch (Exception e) {
                         usedUrls.add(url);
-                        if (max-- != 0 && urls.size() > 0) continue;
+                        if (max != 0 && urls.size() > 0) continue;
                         return "ERROE!!!";
                     }
                 }
